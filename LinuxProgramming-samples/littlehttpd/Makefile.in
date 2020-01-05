@@ -1,0 +1,24 @@
+# $Id: Makefile.in,v 1.4 2005/03/11 18:21:41 aamine Exp $
+
+CC       = @CC@
+CFLAGS   = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@ @DEFS@
+
+TARGET   = littlehttpd
+SRCS     = littlehttpd.c
+OBJS     = littlehttpd.o
+LIBS     = @LIBS@
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(OBJS) $(LIBS) -o $@
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+distclean: clean
+	rm -rf configure configure.scan config.* auto* Makefile
+
+clean:
+	rm -f $(TARGET) *.o
